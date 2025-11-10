@@ -1,3 +1,4 @@
+// app/page.tsx
 import About from "@/components/Index/About";
 import Features from "@/components/Index/Features";
 import Footer from "@/components/Index/Footer";
@@ -6,16 +7,14 @@ import Hero from "@/components/Index/Hero";
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-gray-950 ...">
+    <div className="flex min-h-screen flex-col bg-white text-gray-900 dark:bg-gray-950 dark:text-white">
       <main>
-        {/* Wrapper 'relative' ini SANGAT PENTING */}
         <div className="relative">
-          <Header /> {/* Header akan mengambang di atas */}
-          <Hero /> {/* Hero akan berada di bawahnya */}
+          <Header />
+          <Hero />
         </div>
-
-        <Features />
         <About />
+        <Features />
       </main>
       <Footer />
     </div>
