@@ -1,4 +1,3 @@
-// components/App/FeedColumn.tsx
 "use client";
 import PostCard from "./PostCard";
 
@@ -6,26 +5,33 @@ const posts = [
   {
     id: 1,
     user: {
-      name: "Andrew Reinhart",
-      username: "@andrew",
-      avatar: "/images/index/88.jpg",
+      name: "Mo🌖",
+      username: "@mownohoes",
+      avatar: "/images/home/mo.jpg",
+      isVerified: true,
     },
-    content:
-      "Ini adalah postingan pertama saya di Corclo! Platform ini dibuat dengan Bootstrap 5 dan Next.js.",
+    content: `i miss you so much i hope ur doing good i love you so much, not a day goes by where i dont think about you i dont like to do this life thing without you. i love you in more ways you can imagine
+
+    always waiting for ur notification like a new member to my streams❤️`,
     timestamp: "5m ago",
+    media: {
+      type: "image" as "image" | "video",
+      url: "/images/home/mopost.jpeg",
+    },
   },
   {
     id: 2,
     user: {
-      name: "Jane Doe",
-      username: "@janedoe",
-      avatar: "/images/index/ai.jpg",
+      name: "Esports.gg",
+      username: "@esports.gg",
+      avatar: "/images/home/EsportLogo.png",
+      isVerified: true,
     },
     content:
-      "Baru saja mencoba komponen 'feature-card-glass'. Efek blur-nya keren banget! Ini contoh gambar.",
+      "100 Thieves victory at Red Bull Home Ground was overwhelmingly dominant, and here`s why.",
     timestamp: "1h ago",
     media: {
-      type: "image" as "image" | "video", 
+      type: "image" as "image" | "video",
       url: "/images/index/esport.jpg",
     },
   },
@@ -35,13 +41,13 @@ const posts = [
       name: "Tech Enthusiast",
       username: "@techy",
       avatar: "/images/index/web3.png",
+      isVerified: false,
     },
     content: "Bagaimana cara kerja video di platform ini? Mari kita coba.",
     timestamp: "2h ago",
-    // 💡 CONTOH MEDIA VIDEO (Gunakan URL placeholder)
     media: {
       type: "video" as "image" | "video",
-      url: "https://www.w3schools.com/html/mov_bbb.mp4", // URL video dummy
+      url: "/videos/home/livyPost.mp4",
     },
   },
 ];

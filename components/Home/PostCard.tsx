@@ -1,99 +1,133 @@
-// components/App/PostCard.tsx
 "use client";
 
-import { Heart, MessageCircle, MoreHorizontal, Share2 } from "lucide-react";
-import { Button, Card, Image } from "react-bootstrap";
+import { BadgeCheck, Heart, MessageCircle, Repeat } from "lucide-react";
+import { Button, Image } from "react-bootstrap";
 
-// 💡 1. PERBARUI TIPE DATA
-// Kita tambahkan properti 'media' yang opsional
-type PostProps = {
-  post: {
-    user: { name: string; username: string; avatar: string };
-    content: string;
-    timestamp: string;
-    media?: {
-      type: "image" | "video";
-      url: string;
-    };
-  };
+// Tipe data
+type PostUser = {
+  name: string;
+  username: string;
+  avatar: string;
+  isVerified?: boolean;
 };
 
-export default function PostCard({ post }: PostProps) {
+type PostMedia = {
+  type: "image" | "video";
+  url: string;
+};
+
+type Post = {
+  id: number;
+  user: PostUser;
+  content: string;
+  timestamp: string;
+  media?: PostMedia; // Dibuat opsional
+};
+
+interface PostCardProps {
+  post: Post;
+}
+
+export default function PostCard({ post }: PostCardProps) {
   return (
-    <Card className="feature-card-glass border-0">
-      <Card.Body className="p-3">
-        {/* Info User (Tidak berubah) */}
-        <div className="d-flex align-items-center mb-3">
-          <Image
-            src={post.user.avatar}
-            roundedCircle
-            style={{ width: "40px", height: "40px" }}
-          />
-          <div className="ms-3">
-            <h6 className="fw-bold mb-0 text-body">{post.user.name}</h6>
-            <small className="text-body-secondary">
-              {post.user.username} · {post.timestamp}
-            </small>
-          </div>
-          <Button
-            variant="light"
-            size="sm"
-            className="rounded-circle p-2 ms-auto"
-          >
-            <MoreHorizontal size={20} />
-          </Button>
+    // Desain minimalis dengan border-bottom
+    <div className="d-flex align-items-start p-3 border-bottom">
+      <Image
+        src={post.user.avatar}
+        roundedCircle
+        width={48}
+        height={48}
+        alt={post.user.name}
+        className="me-3"
+        onError={(e) => {
+          (e.target as HTMLImageElement).src =
+            "https://placehold.co/48x48/E9ECEF/495057?text=Err";
+        }}
+      />
+
+      <div className="w-100">
+        {/* Header Postingan */}
+        <div className="d-flex align-items-center mb-1">
+          <h6 className="fw-bold mb-0 text-body d-flex align-items-center">
+            {post.user.name}
+            {post.user.isVerified && (
+              <BadgeCheck
+                size={16}
+                fill="#1D9BF0"
+                color="#FFFFFF"
+                className="ms-1 flex-shrink-0"
+              />
+            )}
+          </h6>
+          <small className="text-body-secondary ms-2 text-truncate">
+            {post.user.username} · {post.timestamp}
+          </small>
         </div>
 
-        {/* Konten Post (Tidak berubah) */}
-        <Card.Text className="text-body mb-3">{post.content}</Card.Text>
+        {/* Konten Postingan */}
+        <p
+          className="text-body mb-2"
+          style={{ whiteSpace: "pre-line" }} // Ini akan membaca baris baru
+        >
+          {post.content}
+        </p>
 
-        {/* 💡 2. TAMBAHKAN BLOK MEDIA (GAMBAR/VIDEO) */}
+        {/* Media */}
         {post.media && (
           <div
-            className="mb-3"
-            style={{ overflow: "hidden", borderRadius: "0.5rem" }}
+            className="mt-3 rounded-4 overflow-hidden"
+            style={{ maxHeight: "500px", backgroundColor: "#000" }} // Tambahkan bg hitam untuk video
           >
-            {/* Jika tipe media adalah 'image' */}
-            {post.media.type === "image" && (
-              <Image src={post.media.url} fluid alt="Post content" />
-            )}
-
-            {/* Jika tipe media adalah 'video' */}
-            {post.media.type === "video" && (
+            {post.media.type === "image" ? (
+              <Image
+                src={post.media.url}
+                fluid
+                alt="Post media"
+                className="w-100 object-fit-cover"
+                style={{ maxHeight: "500px" }}
+              />
+            ) : (
               <video
-                controls
-                width="100%"
-                style={{ display: "block", maxHeight: "450px" }}
+                src={post.media.url}
+                controls // 1. Tetap ada tombol pause/play
+                autoPlay // 2. Autoplay
+                loop // 3. Loop (tanpa berhenti)
+                muted // 4. PENTING agar autoplay jalan
+                playsInline // 5. Bantuan untuk mobile
+                className="w-100"
+                style={{ maxHeight: "500px", display: "block" }}
               >
-                <source src={post.media.url} type="video/mp4" />
-                Browser Anda tidak mendukung tag video.
+                Your browser does not support the video tag.
               </video>
             )}
           </div>
         )}
 
-        {/* Tombol Aksi (Tidak berubah) */}
-        <div className="d-flex justify-content-around text-body-secondary border-top pt-2">
+        {/* Tombol Aksi */}
+        <div className="d-flex justify-content-between mt-3 text-body-secondary">
           <Button
-            variant="light"
-            className="d-flex align-items-center gap-2 border-0 bg-transparent text-body-secondary"
+            variant="link"
+            className="text-decoration-none text-body-secondary p-0 d-flex align-items-center"
           >
-            <MessageCircle size={18} /> 0
+            <Heart size={18} />
+            <small className="ms-1">Suka</small>
           </Button>
           <Button
-            variant="light"
-            className="d-flex align-items-center gap-2 border-0 bg-transparent text-body-secondary"
+            variant="link"
+            className="text-decoration-none text-body-secondary p-0 d-flex align-items-center"
           >
-            <Heart size={18} /> 0
+            <MessageCircle size={18} />
+            <small className="ms-1">Komentar</small>
           </Button>
           <Button
-            variant="light"
-            className="d-flex align-items-center gap-2 border-0 bg-transparent text-body-secondary"
+            variant="link"
+            className="text-decoration-none text-body-secondary p-0 d-flex align-items-center"
           >
-            <Share2 size={18} />
+            <Repeat size={18} />
+            <small className="ms-1">Repost</small>
           </Button>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 }

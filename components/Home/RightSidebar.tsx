@@ -1,76 +1,115 @@
 "use client";
 
-import { Button, Card, Image, ListGroup } from "react-bootstrap";
+import { BadgeCheck } from "lucide-react";
+import Link from "next/link"; // 1. Impor Link dari next/link
+import { Button, Image, ListGroup } from "react-bootstrap";
 
 export default function RightSidebar() {
   const verifiedUsers = [
     {
       id: 1,
-      name: "Akun Verifikasi",
-      username: "akunverif_1",
-      avatar: "https://placehold.co/32x32/E9ECEF/495057?text=A1",
+      name: "u.s.s",
+      username: "uss",
+      avatar: "images/home/uss.png",
     },
     {
       id: 2,
-      name: "Developer Handal",
-      username: "dev_handal",
-      avatar: "https://placehold.co/32x32/E9ECEF/495057?text=D2",
+      name: "Riot Games",
+      username: "riotgames",
+      avatar: "images/home/riot.jpg",
     },
     {
       id: 3,
-      name: "Desainer Kreatif",
-      username: "desainer_kreatif",
-      avatar: "https://placehold.co/32x32/E9ECEF/495057?text=D3",
+      name: "Pelita Jaya Jakarta",
+      username: "pelitajayabasketball",
+      avatar: "images/home/pj.png",
+    },
+  ];
+
+  // 2. Buat data trends menjadi array agar dinamis
+  const trends = [
+    {
+      id: 1,
+      category: "Trending in Indonesia",
+      tag: "Nextjs", // Tag bersih tanpa '#'
+      posts: "15.2k posts",
+    },
+    {
+      id: 2,
+      category: "Trending in Tech",
+      tag: "Bootstrap5",
+      posts: "8.7k posts",
+    },
+    {
+      id: 3,
+      category: "Gaming",
+      tag: "Valorant",
+      posts: "122.1k posts",
     },
   ];
 
   return (
     <div className="position-sticky" style={{ top: "80px" }}>
-      {/* Card: Siapa untuk diikuti */}
-      <Card className="feature-card-glass border-0">
-        <Card.Body className="py-2 px-3">
-          <Card.Title className="fw-bold fs-6 text-body mb-2">
-            Siapa untuk diikuti
-          </Card.Title>
+      {/* Wadah datar (flat) */}
+      <div className="rounded-4 p-3 bg-body-tertiary">
+        {/* Bagian: Siapa untuk diikuti */}
+        <div>
+          <h5 className="fw-bold fs-6 text-body mb-2">Siapa untuk diikuti</h5>
           <ListGroup variant="flush" className="mt-2">
             {verifiedUsers.map((user) => (
               <ListGroup.Item
                 key={user.id}
                 className="bg-transparent border-0 px-0 py-2 d-flex align-items-center"
               >
-                <Image
-                  src={user.avatar}
-                  roundedCircle
-                  width={32}
-                  height={32}
-                  className="me-2"
-                  alt={user.name}
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src =
-                      "https://placehold.co/32x32/E9ECEF/495057?text=Err";
-                  }}
-                />
-                <div className="flex-grow-1 overflow-hidden me-2">
-                  <h6
-                    className="fw-bold mb-0 text-body d-flex align-items-center"
-                    style={{ fontSize: "0.9rem" }}
-                  >
-                    <span className="text-truncate">{user.name}</span>
-                    <span
-                      className="ms-1 flex-shrink-0"
-                      title="Verified Account"
-                      style={{ color: "#1D9BF0", fontSize: "0.8rem" }}
+                {/* 3. Menambahkan Link untuk avatar dan info user */}
+                <Link
+                  href={`/profile/${user.username}`}
+                  className="d-flex align-items-center text-decoration-none flex-grow-1 overflow-hidden me-2"
+                >
+                  <Image
+                    src={user.avatar}
+                    roundedCircle
+                    width={32}
+                    height={32}
+                    alt={user.name}
+                    // 👇 Tambahkan baris ini
+                    style={{ objectFit: "cover" }}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src =
+                        "https://placehold.co/32x32/E9ECEF/495057?text=Err";
+                    }}
+                  />
+                  <div className="flex-grow-1 overflow-hidden ms-2">
+                    <h6
+                      className="fw-bold mb-0 d-flex align-items-center"
+                      style={{ fontSize: "0.9rem" }}
                     >
-                      ✓
-                    </span>
-                  </h6>
-                  <small
-                    className="text-body-secondary text-truncate d-block"
-                    style={{ fontSize: "0.75rem" }}
-                  >
-                    @{user.username}
-                  </small>
-                </div>
+                      {/* Tambahkan 'text-body' agar tidak jadi biru */}
+                      <span className="text-truncate text-body">
+                        {user.name}
+                      </span>
+                      <span
+                        title="Verified Account"
+                        className="d-flex align-items-center"
+                      >
+                        <BadgeCheck
+                          size={14}
+                          fill="#1D9BF0"
+                          color="#FFFFFF"
+                          className="ms-1 flex-shrink-0"
+                        />
+                      </span>
+                    </h6>
+                    <small
+                      className="text-body-secondary text-truncate d-block"
+                      style={{ fontSize: "0.75rem" }}
+                    >
+                      @{user.username}
+                    </small>
+                  </div>
+                </Link>
+
+                {/* Tombol Follow tetap terpisah dari Link */}
                 <Button
                   variant="dark"
                   size="sm"
@@ -86,57 +125,39 @@ export default function RightSidebar() {
                 </Button>
               </ListGroup.Item>
             ))}
-            {/* Link "Tampilkan lebih banyak" telah dihapus */}
           </ListGroup>
-        </Card.Body>
-      </Card>
+        </div>
 
-      {/* Card: Trends */}
-      <Card className="feature-card-glass border-0 mt-3">
-        <Card.Body className="py-2 px-3">
-          <Card.Title className="fw-bold fs-6 text-body mb-2">
-            Trends for you
-          </Card.Title>
+        <hr className="my-3" />
+
+        {/* Bagian: Trends */}
+        <div>
+          <h5 className="fw-bold fs-6 text-body mb-2">Trends for you</h5>
+          {/* 4. Mengubah list trends menjadi dinamis (mapping) */}
           <ListGroup variant="flush" className="mt-2">
-            <ListGroup.Item className="bg-transparent border-0 px-0 py-1 text-body-secondary">
-              <small className="d-block" style={{ fontSize: "0.75rem" }}>
-                Trending in Indonesia
-              </small>
-              <h6
-                className="fw-bold mb-0 text-body"
-                style={{ fontSize: "0.9rem" }}
+            {trends.map((trend) => (
+              <ListGroup.Item
+                key={trend.id}
+                as={Link} // 5. Mengubah ListGroup.Item menjadi Link
+                href={`/explore?tag=${trend.tag}`} // 6. Menambahkan href
+                action // Menambahkan efek hover
+                className="bg-transparent border-0 px-0 py-1 text-body-secondary text-decoration-none"
               >
-                #Nextjs
-              </h6>
-              <small style={{ fontSize: "0.75rem" }}>15.2k posts</small>
-            </ListGroup.Item>
-            <ListGroup.Item className="bg-transparent border-0 px-0 py-1 text-body-secondary">
-              <small className="d-block" style={{ fontSize: "0.75rem" }}>
-                Trending in Tech
-              </small>
-              <h6
-                className="fw-bold mb-0 text-body"
-                style={{ fontSize: "0.9rem" }}
-              >
-                #Bootstrap5
-              </h6>
-              <small style={{ fontSize: "0.75rem" }}>8.7k posts</small>
-            </ListGroup.Item>
-            <ListGroup.Item className="bg-transparent border-0 px-0 py-1 text-body-secondary">
-              <small className="d-block" style={{ fontSize: "0.75rem" }}>
-                Gaming
-              </small>
-              <h6
-                className="fw-bold mb-0 text-body"
-                style={{ fontSize: "0.9rem" }}
-              >
-                #Valorant
-              </h6>
-              <small style={{ fontSize: "0.75rem" }}>122.1k posts</small>
-            </ListGroup.Item>
+                <small className="d-block" style={{ fontSize: "0.75rem" }}>
+                  {trend.category}
+                </small>
+                <h6
+                  className="fw-bold mb-0 text-body"
+                  style={{ fontSize: "0.9rem" }}
+                >
+                  #{trend.tag} {/* Menampilkan tag dengan '#' */}
+                </h6>
+                <small style={{ fontSize: "0.75rem" }}>{trend.posts}</small>
+              </ListGroup.Item>
+            ))}
           </ListGroup>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
