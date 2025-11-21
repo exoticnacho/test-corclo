@@ -1,81 +1,143 @@
 "use client";
-import { MessageSquare, Shield, Users } from "lucide-react";
+
+import { Globe, Lock, Shield, Smartphone, Smile, Zap } from "lucide-react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 
 export default function Features() {
+  const features = [
+    {
+      icon: Shield,
+      title: "Secure by Design",
+      desc: "Data kamu diamankan dengan enkripsi tingkat militer.",
+      color: "#10b981", // Emerald/Green
+      bg: "rgba(16, 185, 129, 0.1)",
+    },
+    {
+      icon: Zap,
+      title: "Lightning Fast",
+      desc: "Loading instan berkat teknologi Next.js terbaru.",
+      color: "#8b5cf6", // Violet
+      bg: "rgba(139, 92, 246, 0.1)",
+    },
+    {
+      icon: Smile,
+      title: "User Friendly",
+      desc: "Antarmuka yang simpel, bersih, dan mudah digunakan.",
+      color: "#f59e0b", // Amber
+      bg: "rgba(245, 158, 11, 0.1)",
+    },
+    {
+      icon: Smartphone,
+      title: "Mobile First",
+      desc: "Akses nyaman dari smartphone maupun desktop.",
+      color: "#ec4899", // Pink
+      bg: "rgba(236, 72, 153, 0.1)",
+    },
+    {
+      icon: Globe,
+      title: "Global Reach",
+      desc: "Server tersebar di seluruh dunia untuk akses cepat.",
+      color: "#3b82f6", // Blue
+      bg: "rgba(59, 130, 246, 0.1)",
+    },
+    {
+      icon: Lock,
+      title: "Privacy Focus",
+      desc: "Kami tidak menjual data pribadimu ke pihak ketiga.",
+      color: "#ef4444", // Red
+      bg: "rgba(239, 68, 68, 0.1)",
+    },
+  ];
+
   return (
-    <section id="features" className="bg-body py-5">
-      <Container style={{ maxWidth: "960px" }}>
-        <div className="text-center">
-          <h2 className="display-5 fw-bold text-body">
-            Built on Connection, Trust, and Chat
+    <section
+      id="features"
+      className="position-relative py-5 overflow-hidden"
+      style={{
+        backgroundColor: "#050505",
+        color: "white",
+      }}
+    >
+      <div
+        className="position-absolute w-100 h-100 top-0 start-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+          zIndex: 0,
+        }}
+      />
+
+      <div
+        className="position-absolute top-0 start-50 translate-middle-x"
+        style={{
+          width: "60%",
+          height: "400px",
+          background:
+            "radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(0,0,0,0) 70%)",
+          filter: "blur(80px)",
+          zIndex: 0,
+        }}
+      />
+
+      <Container className="position-relative py-5" style={{ zIndex: 1 }}>
+        <div className="text-center mb-5">
+          <div className="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill border border-primary border-opacity-25 bg-primary bg-opacity-10 mb-3">
+            <span className="text-primary small fw-bold text-uppercase tracking-wide">
+              Features
+            </span>
+          </div>
+          <h2 className="display-5 fw-bold mb-3">
+            Fitur{" "}
+            <span
+              style={{
+                background: "linear-gradient(90deg, #a78bfa 0%, #e879f9 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Unggulan
+            </span>
           </h2>
-          <p className="fs-5 text-body-secondary mt-3">
-            Corclo is designed around three core pillars to make your digital
-            experience better.
+          <p
+            className="text-secondary lead mx-auto"
+            style={{ maxWidth: "600px" }}
+          >
+            Semua yang kamu butuhkan untuk bersosialisasi dengan aman dan nyaman
+            dalam satu platform.
           </p>
         </div>
 
-        <Row className="mt-5 g-4">
-          <Col md={4}>
-            <Card className="border-0 p-3 feature-card-glass h-100">
-              <Card.Body className="text-start">
-                <div
-                  className="rounded-circle p-3 d-inline-flex"
-                  style={{ backgroundColor: "var(--bs-primary-bg-subtle)" }}
-                >
-                  <Users className="text-primary" size={32} />
-                </div>
-                <h3 className="fs-4 fw-semibold mt-4 text-body">
-                  Genuine Connection
-                </h3>
-                <Card.Text className="text-body-secondary mt-2">
-                  Find communities that truly align with your unique interests
-                  and passions. Built for depth, not fleeting trends.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={4}>
-            <Card className="border-0 p-3 feature-card-glass h-100">
-              <Card.Body className="text-start">
-                <div
-                  className="rounded-circle p-3 d-inline-flex"
-                  style={{ backgroundColor: "var(--bs-danger-bg-subtle)" }}
-                >
-                  <Shield className="text-danger" size={32} />
-                </div>
-                <h3 className="fs-4 fw-semibold mt-4 text-body">
-                  Privacy First
-                </h3>
-                <Card.Text className="text-body-secondary mt-2">
-                  Your safety is our priority. Control your data with robust,
-                  granular privacy settings and security features.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={4}>
-            <Card className="border-0 p-3 feature-card-glass h-100">
-              <Card.Body className="text-start">
-                <div
-                  className="rounded-circle p-3 d-inline-flex"
-                  style={{ backgroundColor: "var(--bs-success-bg-subtle)" }}
-                >
-                  <MessageSquare className="text-success" size={32} />
-                </div>
-                <h3 className="fs-4 fw-semibold mt-4 text-body">
-                  Integrated Messaging
-                </h3>
-                <Card.Text className="text-body-secondary mt-2">
-                  Chat instantly with friends or community members with our
-                  powerful, built-in, real-time messenger.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
+        <Row className="g-4">
+          {features.map((feature, index) => (
+            <Col md={6} lg={4} key={index}>
+              <Card
+                className="h-100 border border-secondary border-opacity-25 text-white"
+                style={{
+                  background: "rgba(255, 255, 255, 0.02)",
+                  backdropFilter: "blur(10px)",
+                }}
+              >
+                <Card.Body className="p-4">
+                  <div
+                    className="mb-4 d-inline-flex p-3 rounded-3"
+                    style={{
+                      backgroundColor: feature.bg,
+                      color: feature.color,
+                    }}
+                  >
+                    <feature.icon size={28} />
+                  </div>
+                  <Card.Title className="fw-bold mb-3 fs-4">
+                    {feature.title}
+                  </Card.Title>
+                  <Card.Text className="text-secondary">
+                    {feature.desc}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
         </Row>
       </Container>
     </section>

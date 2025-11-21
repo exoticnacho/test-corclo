@@ -1,38 +1,24 @@
-// app/layout.tsx
+import "bootstrap/dist/css/bootstrap.min.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-
-// 1. Impor CSS Bootstrap
-import "bootstrap/dist/css/bootstrap.min.css";
-// 2. Impor file globals.css (kita akan mengeditnya di langkah berikutnya)
-import "./globals.css";
-
-import { ThemeProvider } from "@/components/ThemeProvider";
+import "./globals.css"; 
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Corclo",
-  description: "The new way to connect, share, and discover.",
+  title: "Corclo Social",
+  description: "Connect with friends",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider
-          // 3. Gunakan 'data-bs-theme' untuk dark mode Bootstrap
-          attribute="data-bs-theme"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+    <html lang="en">
+      <body className={`${inter.className} bg-dark text-white`}>
+        <div className="min-vh-100 d-flex flex-column">{children}</div>
       </body>
     </html>
   );

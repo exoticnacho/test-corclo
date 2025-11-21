@@ -1,204 +1,22 @@
-/* --- global.css (TEMA KUSTOM BARU - DIPERBAIKI) --- */
-
-/* 1. Impor Font Modern (Opsional, tapi disarankan) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
-
-/* 2. Variabel Tema Utama (Root) */
-:root {
-  /* Warna Primer (Brand) Anda - Ungu Terang */
-  --bs-primary: oklch(0.45 0.23 263.31);
-  --bs-primary-rgb: 82, 39, 255;
-
-  /* Warna Sekunder Baru - Tosca/Mint untuk kontras */
-  --bs-secondary: oklch(0.65 0.15 180);
-  --bs-secondary-rgb: 50, 168, 160;
-
-  /* Menetapkan font default */
-  --bs-font-sans-serif: "Inter", sans-serif;
-}
-
-/* 3. Pengaturan Font Global */
+/* app/globals.css */
 body {
-  font-family: var(--bs-font-sans-serif);
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
 }
 
-/* 4. TEMA LIGHT MODE (Tema "Lavender Terang") */
-[data-bs-theme="light"] {
-  /* Latar belakang bukan putih, tapi lavender yang sangat pucat */
-  --bs-body-bg: oklch(0.98 0.005 263.31);
-  --bs-body-bg-rgb: 248, 247, 250;
-
-  /* Teks bukan hitam, tapi ungu yang sangat gelap */
-  --bs-body-color: oklch(0.15 0.015 263.31);
-  --bs-body-color-rgb: 37, 36, 40;
-
-  /* Warna teks sekunder/muted */
-  --bs-secondary-color: oklch(0.4 0.015 263.31);
-  --bs-secondary-color-rgb: 104, 101, 107;
-
-  /* Border/garis pemisah */
-  --bs-border-color: oklch(0.9 0.01 263.31);
-
-  /* Kartu, dll. bisa dibuat putih bersih agar "pop-out" */
-  --bs-card-bg: #ffffff;
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* 5. TEMA DARK MODE (Tema Hitam Murni) */
-[data-bs-theme="dark"] {
-  /* Latar belakang diubah menjadi hitam murni */
-  --bs-body-bg: #000000;
-  --bs-body-bg-rgb: 0, 0, 0;
-
-  /* 💡 INI BARIS PENTINGNYA 💡 */
-  --bs-body-tertiary-bg: var(--bs-body-bg);
-
-  /* Teks bukan putih, tapi lavender yang sangat pucat */
-  --bs-body-color: oklch(0.98 0.005 263.31);
-  --bs-body-color-rgb: 248, 247, 250;
-
-  /* 💡 PASTIKAN ANDA MASIH PUNYA INI 💡 */
-  --bs-secondary-color: oklch(0.7 0.01 263.31);
-  --bs-secondary-color-rgb: 175, 173, 179;
-  --bs-border-color: oklch(0.3 0.02 263.31);
-  --bs-card-bg: oklch(0.2 0.02 263.31);
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
 }
 
-/* 6. CSS Kustom untuk Header Pill (Sudah disesuaikan) */
-.header-pill {
-  top: 1.5rem;
-  max-width: 56rem;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 9999px;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-
-  /* Efek backdrop-blur */
-  backdrop-filter: blur(16px);
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
 }
 
-/* Style Pill untuk Light Mode */
-[data-bs-theme="light"] .header-pill {
-  /* Menggunakan warna dasar body-bg (lavender pucat) dengan transparansi */
-  background-color: oklch(0.98 0.005 263.31 / 0.7);
-  border: 1px solid oklch(0.9 0.01 263.31);
-  /* Border lavender tipis */
-}
-
-/* Style Pill untuk Dark Mode */
-[data-bs-theme="dark"] .header-pill {
-  /* Menggunakan warna dasar body-bg (hitam) dengan transparansi */
-  background-color: rgba(0, 0, 0, 0.7);
-  border: 1px solid oklch(0.3 0.02 263.31);
-  /* Border ungu-gelap tipis */
-}
-
-/* 7. CSS untuk Kartu Fitur "Glass" yang Theme-Aware */
-.feature-card-glass {
-  backdrop-filter: blur(16px);
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  border: 1px solid;
-  height: 100%;
-  /* Membuat semua kartu sama tinggi */
-  border-radius: 1rem;
-  /* Samakan dengan border-radius Card default */
-}
-
-/* Style kaca untuk Light Mode (Lavender Pucat Transparan) */
-[data-bs-theme="light"] .feature-card-glass {
-  background-color: oklch(0.98 0.005 263.31 / 0.7);
-  border-color: oklch(0.9 0.01 263.31);
-}
-
-/* Style kaca untuk Dark Mode (Hitam Transparan) */
-[data-bs-theme="dark"] .feature-card-glass {
-  background-color: rgba(0, 0, 0, 0.7);
-  border-color: oklch(0.3 0.02 263.31);
-}
-
-/* --- CSS untuk Infinite Scroller (Marquee) --- */
-
-.scroller-container {
-  /* (Opsional) Efek 'fade' di tepi agar terlihat mulus */
-  -webkit-mask-image: linear-gradient(to right,
-      transparent,
-      white 20%,
-      white 80%,
-      transparent);
-  mask-image: linear-gradient(to right,
-      transparent,
-      white 20%,
-      white 80%,
-      transparent);
-
-  /* Sembunyikan item di luar 'jendela' */
-  overflow: hidden;
-  max-width: 100%;
-}
-
-.scroller-track {
-  display: flex;
-  width: max-content;
-  /* 🚀 PERBAIKAN: Gunakan px agar calc() 100% akurat */
-  gap: 24px;
-  will-change: transform;
-  /* Untuk memperhalus animasi */
-
-  /* 🚀 KECEPATAN: 20s */
-  animation: scroll 20s linear infinite;
-}
-
-.scroller-item {
-  /* Beri lebar tetap untuk setiap kartu. */
-  width: 320px;
-  flex-shrink: 0;
-  /* Mencegah kartu 'menyusut' */
-}
-
-/* --- Keyframes untuk Animasi 'scroll' (Loop Mulus ke Kiri) --- */
-/* 💡 Perhitungan ini untuk BARIS 1 (6 items) 💡 */
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    /* 🚀 PERBAIKAN: Diubah menjadi 6 item agar cocok dengan data TSX */
-    transform: translateX(calc(-6 * 320px - 6 * 24px));
-  }
-}
-
-/* --- CSS untuk Link Footer (Pengganti <style jsx>) --- */
-.footer-link {
-  color: var(--bs-secondary-color);
-  text-decoration: none;
-  transition: color 0.15s ease-in-out;
-}
-
-.footer-link:hover {
-  color: var(--bs-body-color);
-}
-
-/* --- 💡 SOLUSI PAKSA UNTUK FOOTER HITAM 💡 --- */
-[data-bs-theme="dark"] .bg-body-tertiary {
-  background-color: #000000 !important;
-}
-
-/* --- 💡 CSS BARU UNTUK SCROLLER BARIS KEDUA (Gerak Berlawanan) 💡 --- */
-.scroller-track-reverse {
-  /* 🚀 KECEPATAN: SINKRONKAN KE 20s */
-  animation: scroll-reverse 20s linear infinite;
-}
-
-/* 💡 Perhitungan ini untuk BARIS 2 (7 items) - Ini sudah benar */
-@keyframes scroll-reverse {
-  0% {
-    /* Perhitungan 7 item (7 * 320px) + 7 gap (7 * 24px) */
-    transform: translateX(calc(-7 * 320px - 7 * 24px));
-  }
-
-  100% {
-    transform: translateX(0);
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

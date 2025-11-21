@@ -1,105 +1,71 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import React from "react";
-import { Button, Container, Nav, Navbar } from "react-bootstrap";
-import { ThemeToggle } from "../ThemeToggle";
-
-const handleScroll = (
-  e: React.MouseEvent<HTMLElement, MouseEvent>,
-  targetId: string
-) => {
-  e.preventDefault();
-  const targetElement = document.getElementById(targetId);
-  if (targetElement) {
-    window.scrollTo({
-      top: targetElement.offsetTop - 80,
-      behavior: "smooth",
-    });
-  }
-};
+import Link from "next/link";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 export default function Header() {
-  const { theme } = useTheme();
-  const [isMounted, setIsMounted] = React.useState(false);
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null;
-  }
-
   return (
-    <div className="position-fixed w-100 header-pill" style={{ zIndex: 1020 }}>
+    <div
+      className="fixed-top d-flex justify-content-center pt-3 px-3"
+      style={{ zIndex: 1030, pointerEvents: "none" }}
+    >
       <Navbar
         expand="lg"
-        variant={theme === "dark" ? "dark" : "light"}
-        className="bg-transparent"
+        variant="dark"
+        className="rounded-4 border border-secondary border-opacity-25 shadow-lg py-2"
+        style={{
+          backgroundColor: "rgba(33, 37, 41, 0.85)",
+          backdropFilter: "blur(12px)",
+          width: "100%",
+          maxWidth: "900px",
+          pointerEvents: "auto",
+        }}
       >
-        <Container>
-          <Navbar.Brand
-            as="a"
-            href="#hero"
-            className="ms-2"
-            onClick={(e) => handleScroll(e, "hero")}
+        <Container fluid className="px-3">
+          <Link
+            href="/"
+            className="navbar-brand fw-bold d-flex align-items-center gap-2 me-4"
           >
-            Corclo
-          </Navbar.Brand>
+            <span>Corclo</span>
+          </Link>
 
-          <Navbar.Toggle aria-controls="main-navbar" />
+          <Navbar.Toggle
+            aria-controls="floating-navbar-nav"
+            className="border-0"
+          />
 
-          <Navbar.Collapse id="main-navbar">
-            <Nav className="ms-auto d-flex flex-row align-items-center">
-              <Nav.Link
-                as="a"
-                href="#hero"
-                onClick={(e) => handleScroll(e, "hero")}
-              >
+          <Navbar.Collapse id="floating-navbar-nav">
+            <Nav className="mx-auto my-2 my-lg-0">
+              <Link href="#home" className="nav-link px-2 fw-medium">
                 Home
-              </Nav.Link>
-              <Nav.Link
-                as="a"
-                href="#about"
-                onClick={(e) => handleScroll(e, "about")}
-              >
+              </Link>
+              <Link href="#about" className="nav-link px-2 fw-medium">
                 About
-              </Nav.Link>
-              <Nav.Link
-                as="a"
-                href="#features"
-                onClick={(e) => handleScroll(e, "features")}
-              >
+              </Link>
+              <Link href="#features" className="nav-link px-2 fw-medium">
                 Features
-              </Nav.Link>
-              <Nav.Link
-                as="a"
-                href="#community"
-                onClick={(e) => handleScroll(e, "community")}
-              >
+              </Link>
+              <Link href="#community" className="nav-link px-2 fw-medium">
                 Community
-              </Nav.Link>
-
-              <div className="vr mx-3" />
-
-              <Nav.Link as="a" href="/sign-in">
-                Sign In
-              </Nav.Link>
-
-              <Button
-                as="a"
-                href="/sign-up"
-                variant="primary"
-                className="ms-3 rounded-pill"
-                size="sm"
-              >
-                Sign Up
-              </Button>
-
-              <div className="ms-3">
-                <ThemeToggle />
-              </div>
+              </Link>
             </Nav>
+
+            <div className="d-flex gap-2">
+              <Link
+                href="/login"
+                className="btn btn-outline-light btn-sm rounded-pill px-3 border-0"
+              >
+                Sign In
+              </Link>
+
+              <Link
+                href="/register"
+                className="btn btn-primary btn-sm rounded-pill px-4 fw-bold"
+                style={{ backgroundColor: "#7c3aed", borderColor: "#7c3aed" }}
+              >
+                Get Started
+              </Link>
+            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
