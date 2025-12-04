@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Button, Container, Form, Image, Nav, Dropdown } from "react-bootstrap";
+import { useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
 
 type UserProfileData = {
@@ -47,6 +48,7 @@ export default function ProfileView({
   currentUserId: number;
   isFollowing?: boolean;
 }) {
+  const router = useRouter();
   const [preview, setPreview] = useState<string | null>(null);
   const [fileType, setFileType] = useState<"image" | "video" | null>(null);
   const [activeTab, setActiveTab] = useState("posts");
@@ -196,6 +198,13 @@ export default function ProfileView({
             </div>
             
             <div className="mb-3 d-flex gap-2">
+              <Button
+                variant="light"
+                className="rounded-pill fw-bold"
+                onClick={() => router.push('/home')}
+              >
+                Home
+              </Button>
               {!isOwnProfile ? (
                 <>
                   <Dropdown>
